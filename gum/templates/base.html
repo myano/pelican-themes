@@ -54,7 +54,21 @@
               </script>
           {% endif %}
 
+        {% if PIWIK_SITE_ID %}
+            <script type="text/javascript">
+                var _paq = _paq || [];
+                _paq.push(["trackPageView"]);
+                _paq.push(["enableLinkTracking"]);
 
+                (function() {
+                 var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{{ PIWIK_URL }}";
+                 _paq.push(["setTrackerUrl", u+"pk.php"]);
+                 _paq.push(["setSiteId", "{{ PIWIK_SITE_ID }}"]);
+                 var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+                 g.defer=true; g.async=true; g.src=u+"pk.js"; s.parentNode.insertBefore(g,s);
+                })();
+            </script>
+        {% endif %}
 
 
         {% endblock head %}
@@ -73,7 +87,7 @@
 
             <div id="navigation" class="navbar row">
               <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
+
               <ul class="columns">
                 <li><a href="{{ SITEURL }}">Home</a></li>
 
